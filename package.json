@@ -1,0 +1,65 @@
+{
+  "name": "yjkz-websocket-service",
+  "version": "1.0.0",
+  "description": "YJKZ继电器控制WebSocket服务",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start:douyin": "node douyin-app.js",
+    "start:enhanced": "node douyin-app-enhanced.js",
+    "dev": "nodemon app.js",
+    "dev:douyin": "nodemon douyin-app.js",
+    "dev:enhanced": "nodemon douyin-app-enhanced.js",
+    "test": "jest --testTimeout=10000",
+    "test:enhanced": "jest tests/douyin-app-enhanced.test.js --testTimeout=10000",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coverage:enhanced": "jest tests/douyin-app-enhanced.test.js --coverage",
+    "lint": "eslint .",
+    "build": "echo 'Build completed'",
+    "deploy:ubuntu": "powershell -ExecutionPolicy Bypass -File deploy-ubuntu.ps1",
+    "deploy:dev": "powershell -ExecutionPolicy Bypass -File deploy-enhanced.ps1 -Environment dev -Action deploy",
+    "deploy:prod": "powershell -ExecutionPolicy Bypass -File deploy-enhanced.ps1 -Environment prod -Action deploy",
+    "restart": "powershell -ExecutionPolicy Bypass -File simple-restart.ps1",
+    "restart:simple": "powershell -ExecutionPolicy Bypass -File restart-app.ps1",
+    "check:remote": "powershell -ExecutionPolicy Bypass -File check-remote.ps1",
+    "setup:ssh": "powershell -ExecutionPolicy Bypass -File setup-ssh.ps1",
+    "health-check": "curl http://192.168.8.6:8080/health || echo 'Health check failed'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.13.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "compression": "^1.7.4",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "eslint": "^8.0.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "websocket",
+    "iot",
+    "relay",
+    "esp32",
+    "douyin",
+    "hardware-control"
+  ],
+  "author": "YJKZ Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djmml/yjkz-websocket-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/djmml/yjkz-websocket-service/issues"
+  },
+  "homepage": "https://github.com/djmml/yjkz-websocket-service#readme"
+}
