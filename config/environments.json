@@ -1,0 +1,100 @@
+{
+  "environments": {
+    "dev": {
+      "name": "dev",
+      "description": "Development environment - 192.168.8.6 server",
+      "websocket": {
+        "port": 8080,
+        "host": "192.168.8.6",
+        "cors": {
+          "origin": "*",
+          "credentials": true
+        }
+      },
+      "esp32": {
+        "wifi": {
+          "ssid": "YJKZ_DEV",
+          "password": "${ESP32_WIFI_PASSWORD}"
+        },
+        "server": {
+          "host": "192.168.8.6",
+          "port": 8080,
+          "protocol": "ws"
+        }
+      },
+      "logging": {
+        "level": "debug",
+        "console": true,
+        "file": true,
+        "path": "./logs/dev.log"
+      },
+      "deployment": {
+        "requiresApproval": false,
+        "healthCheckTimeout": 60,
+        "rollbackEnabled": true
+      }
+    },
+    "production": {
+      "name": "production",
+      "description": "Production environment - 192.168.8.6 server only",
+      "websocket": {
+        "port": 8080,
+        "host": "192.168.8.6",
+        "cors": {
+          "origin": "*",
+          "credentials": true
+        }
+      },
+      "esp32": {
+        "wifi": {
+          "ssid": "YJKZ_PROD",
+          "password": "${ESP32_WIFI_PASSWORD}"
+        },
+        "server": {
+          "host": "192.168.8.6",
+          "port": 8080,
+          "protocol": "ws"
+        }
+      },
+      "logging": {
+        "level": "info",
+        "console": true,
+        "file": true,
+        "path": "./logs/prod.log"
+      },
+      "deployment": {
+        "requiresApproval": false,
+        "healthCheckTimeout": 60,
+        "rollbackEnabled": true
+      }
+    }
+  },
+  "deployment": {
+    "order": ["production"],
+    "autoPromote": {
+      "enabled": false
+    },
+    "rollback": {
+      "enabled": true,
+      "maxAttempts": 3,
+      "timeout": 300
+    },
+    "notifications": {
+      "enabled": true,
+      "channels": ["console", "log"]
+    }
+  },
+  "monitoring": {
+    "healthCheck": {
+      "endpoint": "/health",
+      "interval": 30,
+      "timeout": 10,
+      "retries": 3
+    },
+    "metrics": {
+      "enabled": true,
+      "endpoint": "/metrics",
+      "collectInterval": 60
+    }
+  }
+}
